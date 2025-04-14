@@ -1,10 +1,12 @@
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { CircleCheck, ArrowRight, Globe, Search } from "lucide-react"
+import { CircleCheck } from "lucide-react"
+import ReactMarkdown from "react-markdown"
+import {DeepSearchProps} from "@/models/chat";
 
-export default function DeepSearch() {
+export default function DeepSearch({sections}: DeepSearchProps) {
     return (
-        <div className="flex h-full w-full items-center justify-center text-foreground">
-            <div className="relative w-full max-w-2xl flex border rounded-2xl overflow-hidden">
+        <div className="flex w-full items-center justify-center text-foreground h-[35vh]">
+            <div className="relative w-full max-w-2xl flex border rounded-2xl overflow-hidden h-full">
                 {/* Sidebar */}
                 <div className="w-64 p-4 border-r bg-gradient-to-b from-muted/30 to-muted/10 space-y-6">
                     <div className="space-y-1">
@@ -14,7 +16,7 @@ export default function DeepSearch() {
                     </div>
 
                     <div className="space-y-3">
-                        <div className="flex items-start gap-2 text-sm">
+                        {/*<div className="flex items-start gap-2 text-sm">
                             <CircleCheck className="w-4 h-4 text-green-500 mt-1" />
                             <span className="text-muted-foreground">Thinking</span>
                         </div>
@@ -22,19 +24,25 @@ export default function DeepSearch() {
                         <div className="flex items-start gap-2 text-sm">
                             <ArrowRight className="w-4 h-4 text-blue-500 mt-1" />
                             <span className="text-muted-foreground">Assessing user query</span>
-                        </div>
+                        </div>*/}
+                        {sections.map((section, i) => (
+                            <div key={i} className="flex items-start gap-2 text-sm ">
+                                <CircleCheck className="w-4 h-4 text-green-500 mt-1" />
+                                <span className="text-muted-foreground">{section.header}</span>
+                            </div>
+                        ))}
                     </div>
 
                     <div className="h-[1px] bg-muted rounded-full my-2" />
 
-                    <div className="text-xs text-muted-foreground italic">
+                    <div className="text-xs text-muted-foreground italic flex-1 max-w-full break-words whitespace-pre-wrap overflow-hidden">
                         DeepSearch performs multi-layered contextual analysis and fetches high-confidence sources.
                     </div>
                 </div>
 
                 {/* Main conversation */}
-                <ScrollArea className="flex-1 space-y-4">
-                    <div className="text-sm space-y-4">
+                <ScrollArea className="flex-1 space-y-4 p-3">
+                    {/*<div className="text-sm space-y-4">
                         <p className="px-6 pt-6">
                             Pretty open-ended. <strong>"Best"</strong> could mean quality of life, job prospects,
                             or cultural vibes, and that's tricky to pin down.
@@ -82,7 +90,20 @@ export default function DeepSearch() {
                 <strong> "top 10 most livable cities in India according to Ease of Living Index"</strong>
               </span>
                         </div>
-                    </div>
+                    </div>*/}
+                    {sections.map((section, i) => (
+                        <div key={i} className="space-y-2">
+                            <h2 className="text-base font-semibold text-primary">{section.header}</h2>
+                            {section.summaries.map((summary, j) => {
+
+                                return (
+                                    <div className="markdown prose flex-1 max-w-full text-sm sm:text-base break-words whitespace-pre-wrap overflow-hidden">
+                                        <ReactMarkdown key={j}>{summary}</ReactMarkdown>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    ))}
                 </ScrollArea>
             </div>
         </div>

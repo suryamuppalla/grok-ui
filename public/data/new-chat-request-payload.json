@@ -1,0 +1,28 @@
+{
+  "temporary": false,
+  "modelName": "grok-3",
+  "message": "Best food in hyderabad, telangana",
+  "fileAttachments": [],
+  "imageAttachments": [],
+  "disableSearch": false,
+  "enableImageGeneration": true,
+  "returnImageBytes": false,
+  "returnRawGrokInXaiRequest": false,
+  "enableImageStreaming": true,
+  "imageGenerationCount": 2,
+  "forceConcise": false,
+  "toolOverrides": {
+    "imageGen": false,
+    "webSearch": false,
+    "xSearch": false,
+    "xMediaSearch": false,
+    "trendsSearch": false,
+    "xPostAnalyze": false
+  },
+  "enableSideBySide": true,
+  "sendFinalMetadata": true,
+  "deepsearchPreset": "default",
+  "isReasoning": false,
+  "webpageUrls": [],
+  "disableTextFollowUps": true
+}
